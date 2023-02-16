@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html class="h-full" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,60 +10,31 @@
 </head>
 
 <body class="h-full grid place-items-center">
-    
     <div id="app">
-        <section v-show="inProgressAssignments">
-            <h2 class="font-bold mb-2">In Progress</h2>
-
-            <ul>
-                <li 
-                    v-for="assignment in inProgressAssignments" 
-                    :key="assignment.id"
-                >
-                    <label>
-                        {{ assignment.name }}    
-                        <input type="checkbox" v-model="assignment.complete">
-                    </label>
-                </li>
-            </ul>
-        </section>
-
-        <section v-show="completedAssignments.length" class="mt-6">
-            <h2 class="font-bold mb-2">Completed</h2>
-
-            <ul>
-                <li 
-                    v-for="assignment in completedAssignments" 
-                    :key="assignment.id"
-                >
-                    <label>
-                        {{ assignment.name }}    
-                        <input type="checkbox" v-model="assignment.complete">
-                    </label>
-                </li>
-            </ul>
-        </section>
+        <app-button>Click</app-button>
     </div>
-
+    
     <script>
         let app = {
-            data () {
-                return {
-                    assignments: [
-                        {name: 'Finish Tutorial', complete: false, id: 1},
-                        {name: 'Review Previous CCE Lesson', complete: false, id: 2},
-                        {name: 'Train model', complete: false, id: 3},
-                    ]
-                }
-            },
+            components: {
+                'app-button': {
+                    template: `
+                        <button class="bg-gray-200 hover:bg-gray-400 border rounded px-5 py-2" @click="toggleProcessing" :disabled="processing">
+                            <slot />
+                        </button>
+                    `,
 
-            computed: {
-                inProgressAssignments () {
-                    return this.assignments.filter(assignment => ! assignment.complete)
-                },
+                    data () {
+                        return {
+                            processing: false
+                        }
+                    },
 
-                completedAssignments () {
-                    return this.assignments.filter(assignment => assignment.complete)
+                    methods: {
+                        toggleProcessing() {
+                            this.processing = true
+                        }
+                    }
                 }
             }
         };
