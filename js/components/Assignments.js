@@ -14,11 +14,7 @@ export default {
 
   data() {
     return {
-      assignments: [
-        { name: "Finish Tutorial", complete: false, id: 1, tag: 'math'},
-        { name: "Review Previous CCE Lesson", complete: false, id: 2, tag: 'science'},
-        { name: "Train model", complete: false, id: 3, tag: 'math'},
-      ],
+      assignments: [],
     };
   },
 
@@ -29,6 +25,14 @@ export default {
             completed: this.assignments.filter((assignment) => assignment.complete)
         }
     }
+  },
+
+  created() {
+    fetch('http://localhost:3000/assignments')
+      .then(res => res.json())
+      .then(data => {
+        this.assignments = data
+      })
   },
 
   methods: {
