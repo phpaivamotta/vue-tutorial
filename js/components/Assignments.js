@@ -15,9 +15,9 @@ export default {
   data() {
     return {
       assignments: [
-        { name: "Finish Tutorial", complete: false, id: 1 },
-        { name: "Review Previous CCE Lesson", complete: false, id: 2 },
-        { name: "Train model", complete: false, id: 3 },
+        { name: "Finish Tutorial", complete: false, id: 1, tag: 'math'},
+        { name: "Review Previous CCE Lesson", complete: false, id: 2, tag: 'science'},
+        { name: "Train model", complete: false, id: 3, tag: 'math'},
       ],
     };
   },
